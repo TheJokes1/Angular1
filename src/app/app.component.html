@@ -6,8 +6,14 @@
     <mat-label>Input</mat-label>
     <input matInput placeholder="gokje"
     type= "number"
-    (keydown.enter)="onEnter()"
-    ng-Model = 'waarde'>
+    #waarde>
+    <button (click)="onEnter(waarde.value)">Bevestig</button>
 </mat-form-field>
+<p>
 
+</p>
 <p *ngIf="waarde > 50">te groot</p>
+
+
+
+    <!-- (keydown.enter)="onEnter()" -->
