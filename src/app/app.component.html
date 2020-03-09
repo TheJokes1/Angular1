@@ -11,7 +11,7 @@
 
 <input [(ngModel)]="waarde">
 
-<a *ngIf="counter!=0 && !guessed">
+<a *ngIf="counter!=0 || !guessed">
     <button mat-raised-button (click)="onSave()">Bevestig</button>
 </a>
 <p></p>
