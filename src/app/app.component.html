@@ -3,14 +3,16 @@
 
 <p>Geef een getal in van 0 tot 100</p>
 
-<mat-form-field>
+<!-- <mat-form-field>
     <input matInput placeholder="gokje"
     type= "number"
     #waarde>
-</mat-form-field>
+</mat-form-field> -->
+
+<input [(ngModel)]="waarde">
 
 <a *ngIf="counter!=0 && !guessed">
-    <button mat-raised-button (click)="onSave(waarde.value)">Bevestig</button>
+    <button mat-raised-button (click)="onSave()">Bevestig</button>
 </a>
 <p></p>
 
@@ -28,7 +30,7 @@
 </ng-template>
 
 <p>
-
+Je hebt nog {{secondsLocal}} seconden over
 </p>
 <div *ngIf="counter>0">Aantal beurten: {{counter}}</div>
 
