@@ -1,13 +1,44 @@
+<body>
 <h1>Dit spelletje heet: Raad het getal</h1>
 
 <p>Geef een getal in van 0 tot 100</p>
 
 <mat-form-field>
-    <mat-label>Input</mat-label>
     <input matInput placeholder="gokje"
     type= "number"
-    (keydown.enter)="onEnter()"
-    ng-Model = 'waarde'>
+    #waarde>
 </mat-form-field>
 
-<p *ngIf="waarde > 50">te groot</p>
+<a *ngIf="counter!=0 && !guessed">
+    <button mat-raised-button (click)="onSave(waarde.value)">Bevestig</button>
+</a>
+<p></p>
+
+<div *ngIf="savedValue > randomNumber; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>te groot </ng-template>
+<ng-template #elseBlock>
+    <div *ngIf="savedValue < randomNumber; then thenBlock2 else elseBlock2"></div>
+</ng-template>
+<ng-template #thenBlock2>te klein</ng-template>
+<ng-template #elseBlock2>
+    <div>juist!
+        <script>geraden()</script>
+        <button mat-raised-button (click)= "startOver()">Nogmaals!</button>
+    </div>    
+</ng-template>
+
+<p>
+
+</p>
+<div *ngIf="counter>0">Aantal beurten: {{counter}}</div>
+
+<div *ngIf="counter==0; then thenCounter"></div>
+
+<ng-template #thenCounter> 
+    <div>Oeps, al je beurten zijn op. Het getal was: {{randomNumber}}
+        <button mat-raised-button (click)= "startOver()">Nogmaals!</button>
+    </div>
+</ng-template>
+
+
+</body>

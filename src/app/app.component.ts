@@ -9,14 +9,30 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  savedValue:Number = null;
   title = 'Raad het getal';
-  randomNumber= Math.floor(Math.random() * 100) + 1 ;
+  randomNumber= Math.floor(Math.random() * 100) + 1;
+  counter:number = 10;
+  guessed= false;
   
-  onEnter(){
-    alert("entered")
-  }
-}
+  onSave(waarde){
+    console.log(waarde);
+    this.savedValue = waarde;
+    this.counter--
+  };
 
-export class NgIfComponent { 
-  waarde:number;
+  isTooBig(){
+    return this.savedValue > this.randomNumber;
   }
+
+  startOver(){
+    this.randomNumber= Math.floor(Math.random() * 100) +1;
+    this.counter=10;
+    this.guessed=false;
+  }
+
+  geraden(){
+    this.guessed=true;
+  }
+
+};
