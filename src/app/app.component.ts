@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { MaterialModule } from './material.module';
 import { FormControl } from '@angular/forms';
+<<<<<<< HEAD
 import { CounterService } from './counter.service';
+=======
+>>>>>>> b6e1a6bf74cefca9ec647080002350c1e3ab57cc
 
 
 @Component({
@@ -10,6 +13,7 @@ import { CounterService } from './counter.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+<<<<<<< HEAD
   waarde = 0;
   savedValue:Number = null;
   title = 'Raad het getal';
@@ -45,3 +49,16 @@ constructor(counterservice: CounterService) {
   }
 
 };
+=======
+  title = 'Raad het getal';
+  randomNumber= Math.floor(Math.random() * 100) + 1 ;
+  
+  onEnter(){
+    alert("entered")
+  }
+}
+
+export class NgIfComponent { 
+  waarde:number;
+  }
+>>>>>>> b6e1a6bf74cefca9ec647080002350c1e3ab57cc
