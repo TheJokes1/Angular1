@@ -10,16 +10,16 @@ import { CounterService } from './counter.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  waarde = 0;
+  waarde :number;
   savedValue:Number = null;
   title = 'Raad het getal';
   randomNumber= Math.floor(Math.random() * 100) + 1;
-  counter:number = 10;
-  guessed= false;
-  secondsLocal: number = 60;
+  numberOfGuesses:number = 10;
+  guessed = false;
+  secondsLocal: number;
   
-constructor(counterservice: CounterService) {
-  counterservice.seconds.subscribe((seconds) => {
+constructor(counterService: CounterService) {
+  counterService.seconds.subscribe((seconds) => {
     this.secondsLocal = seconds;
   });
 }
@@ -27,21 +27,27 @@ constructor(counterservice: CounterService) {
   onSave(){
     console.log(this.waarde);
     this.savedValue = this.waarde;
-    this.counter--
+    this.numberOfGuesses--
   };
 
   isTooBig = () => {
     return this.savedValue > this.randomNumber;
-  }
-
-  startOver(){
-    this.randomNumber= Math.floor(Math.random() * 100) +1;
-    this.counter=10;
-    this.guessed=false;
-  }
+  };
 
   geraden(){
     this.guessed=true;
+    console.log(this.guessed)
   }
 
-};
+  nieuwSpel = () => {
+    this.randomNumber= Math.floor(Math.random() * 100) +1;
+    this.numberOfGuesses = 10;
+    this.guessed = false;
+    this.waarde = null;
+  }
+
+  log(){
+    console.log(this.guessed);
+  }
+  
+}

@@ -1,46 +1,65 @@
-<body>
-<h1>Dit spelletje heet: Raad het getal</h1>
+<div fxFlex fxLayout="column" fxLayoutGap="10px" style="height:100vh">
+    <div fxLayout="row wrap">
+        <div fxFlex="50" fxLayout="column" fxFlex.lt-md="100">
+            <body>
+                <h1>Raad het getal</h1>
+                <p>Geef een getal in van 0-100</p>
 
-<p>Geef een getal in van 0 tot 100</p>
+                <input [(ngModel)]="waarde" placeholder="raad hier">
+                <div><br></div>
+                <p *ngIf="numberOfGuesses > 0 && !guessed && secondsLocal > 0">
+                    <button mat-raised-button (click)="onSave()">Bevestig</button>
+                </p>
+            </body>
+        </div>
 
-<!-- <mat-form-field>
-    <input matInput placeholder="gokje"
-    type= "number"
-    #waarde>
-</mat-form-field> -->
-
-<input [(ngModel)]="waarde">
-
-<a *ngIf="counter!=0 || !guessed">
-    <button mat-raised-button (click)="onSave()">Bevestig</button>
-</a>
-<p></p>
-
-<div *ngIf="savedValue > randomNumber; then thenBlock else elseBlock"></div>
-<ng-template #thenBlock>te groot </ng-template>
-<ng-template #elseBlock>
-    <div *ngIf="savedValue < randomNumber; then thenBlock2 else elseBlock2"></div>
-</ng-template>
-<ng-template #thenBlock2>te klein</ng-template>
-<ng-template #elseBlock2>
-    <div>juist!
-        <script>geraden()</script>
-        <button mat-raised-button (click)= "startOver()">Nogmaals!</button>
-    </div>    
-</ng-template>
-
-<p>
-Je hebt nog {{secondsLocal}} seconden over
-</p>
-<div *ngIf="counter>0">Aantal beurten: {{counter}}</div>
-
-<div *ngIf="counter==0; then thenCounter"></div>
-
-<ng-template #thenCounter> 
-    <div>Oeps, al je beurten zijn op. Het getal was: {{randomNumber}}
-        <button mat-raised-button (click)= "startOver()">Nogmaals!</button>
+        <div fxFlex="50" fxLayout="column">
+            <body>
+            <div *ngIf="secondsLocal > 0;then secondsGood else secondsBad"></div>
+                <ng-template #secondsGood>
+                    <div *ngIf="numberOfGuesses > 0; then guessesLeft else noGuessesLeft"></div>
+                        <ng-template #guessesLeft>
+                            <div *ngIf="savedValue < randomNumber && numberOfGuesses < 10; then tooSmall else notTooSmall"></div>
+                                <ng-template #tooSmall>
+                                    <div class="klein"><p>Te klein</p></div>
+                                        <p>Aantal beurten resterend: {{numberOfGuesses}}</p>
+                                        <p>Je hebt nog {{secondsLocal}} seconden over.</p>
+                                        <script>console.log(this.guessed)</script>
+                                </ng-template>
+                                <ng-template #notTooSmall>
+                                    <div *ngIf="savedValue > randomNumber && numberOfGuesses < 10; then tooBig else correct"></div>
+                                    <ng-template #tooBig>
+                                        <div class="groot"><p>Te groot</p></div>
+                                        <p>Aantal beurten resterend: {{numberOfGuesses}}</p>
+                                        <p>Je hebt nog {{secondsLocal}} seconden over.</p>
+                                        <script src= "app.component.ts">log()</script>
+                                    </ng-template>
+                                    <ng-template #correct>
+                                        <ng-template [ngIf] = "numberOfGuesses < 10">
+                                        <div class= "juist"><p>Juist!</p>
+                                        <script src= "app.component.ts">geraden()</script>
+                                        <button class= "button" mat-raised-button (click)= "nieuwSpel()">Nogmaals!</button>
+                                        </div></ng-template>
+                                    </ng-template>
+                                </ng-template>
+                        </ng-template>
+                        <ng-template #noGuessesLeft>
+                            <p>Je hebt geen beurten meer over</p>
+                            <p>het getal was {{randomNumber}}</p>
+                            <!-- zet counter op nul -->
+                            <button class= "button" mat-raised-button (click)= "nieuwSpel()">Nogmaals!</button>
+                        </ng-template>
+                </ng-template>
+                <ng-template #secondsBad>
+                    <div *ngIf="guessed===false; then outOfSeconds"></div>
+                    <ng-template #outOfSeconds>
+                        <p>De tijd is op</p>
+                        <p>het getal was {{randomNumber}}</p>
+                        <!-- zet counter op nul -->
+                        <button class= "button" mat-raised-button (click)= "nieuwSpel()">Nogmaals!</button>
+                    </ng-template>
+                </ng-template>
+            </body>
+        </div>
     </div>
-</ng-template>
-
-
-</body>
+</div>
