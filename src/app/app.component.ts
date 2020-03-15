@@ -17,13 +17,13 @@ export class AppComponent {
   numberOfGuesses:number = 10;
   guessed = false;
   secondsLocal: number;
+  counterService : CounterService;
   
 constructor(counterService: CounterService) {
   counterService.seconds.subscribe((seconds) => {
     this.secondsLocal = seconds;
   });
 }
-
   onSave(){
     console.log(this.waarde);
     this.savedValue = this.waarde;
@@ -36,7 +36,6 @@ constructor(counterService: CounterService) {
 
   geraden(){
     this.guessed=true;
-    console.log(this.guessed)
   }
 
   nieuwSpel = () => {
@@ -44,10 +43,13 @@ constructor(counterService: CounterService) {
     this.numberOfGuesses = 10;
     this.guessed = false;
     this.waarde = null;
+    this.counterService.resetCounter();
+    console.log(this.secondsLocal)
   }
 
   log(){
     console.log(this.guessed);
   }
+
   
 }

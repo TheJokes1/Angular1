@@ -3,8 +3,8 @@
         <div fxFlex="50" fxLayout="column" fxFlex.lt-md="100">
             <body>
                 <h1>Raad het getal</h1>
-                <p>Geef een getal in van 0-100</p>
-
+                <p>Geef een getal in van 0-100 </p>
+                <p>Je hebt nog {{secondsLocal}} seconden over.</p>
                 <input [(ngModel)]="waarde" placeholder="raad hier">
                 <div><br></div>
                 <p *ngIf="numberOfGuesses > 0 && !guessed && secondsLocal > 0">
@@ -14,8 +14,8 @@
         </div>
 
         <div fxFlex="50" fxLayout="column">
-            <body>
-            <div *ngIf="secondsLocal > 0;then secondsGood else secondsBad"></div>
+            <body><br>
+            <div *ngIf="secondsLocal > 0; then secondsGood else secondsBad"></div>
                 <ng-template #secondsGood>
                     <div *ngIf="numberOfGuesses > 0; then guessesLeft else noGuessesLeft"></div>
                         <ng-template #guessesLeft>
@@ -23,31 +23,29 @@
                                 <ng-template #tooSmall>
                                     <div class="klein"><p>Te klein</p></div>
                                         <p>Aantal beurten resterend: {{numberOfGuesses}}</p>
-                                        <p>Je hebt nog {{secondsLocal}} seconden over.</p>
-                                        <script>console.log(this.guessed)</script>
+                                        <!-- <p>Je hebt nog {{secondsLocal}} seconden over.</p> -->
                                 </ng-template>
                                 <ng-template #notTooSmall>
                                     <div *ngIf="savedValue > randomNumber && numberOfGuesses < 10; then tooBig else correct"></div>
                                     <ng-template #tooBig>
                                         <div class="groot"><p>Te groot</p></div>
                                         <p>Aantal beurten resterend: {{numberOfGuesses}}</p>
-                                        <p>Je hebt nog {{secondsLocal}} seconden over.</p>
-                                        <script src= "app.component.ts">log()</script>
+                                        <!-- <p>Je hebt nog {{secondsLocal}} seconden over.</p> -->
                                     </ng-template>
                                     <ng-template #correct>
                                         <ng-template [ngIf] = "numberOfGuesses < 10">
-                                        <div class= "juist"><p>Juist!</p>
-                                        <script src= "app.component.ts">geraden()</script>
-                                        <button class= "button" mat-raised-button (click)= "nieuwSpel()">Nogmaals!</button>
-                                        </div></ng-template>
+                                            <div class= "juist"><p>Juist!</p>
+                                            {{geraden()}}
+                                            <button class= "button" mat-raised-button (click)= "nieuwSpel()">Nogmaals!</button></div>
+                                        </ng-template>
                                     </ng-template>
                                 </ng-template>
                         </ng-template>
                         <ng-template #noGuessesLeft>
                             <p>Je hebt geen beurten meer over</p>
                             <p>het getal was {{randomNumber}}</p>
-                            <!-- zet counter op nul -->
                             <button class= "button" mat-raised-button (click)= "nieuwSpel()">Nogmaals!</button>
+
                         </ng-template>
                 </ng-template>
                 <ng-template #secondsBad>
