@@ -5,10 +5,10 @@
                 <h1>Raad het getal</h1>
                 <p>Geef een getal in van 0-100 </p>
                 <p>Je hebt nog {{secondsLocal}} seconden over.</p>
-                <input [(ngModel)]="waarde" placeholder="raad hier">
+                <input [(ngModel)]="waarde" (keydown)="onKeyDown($event)" placeholder="raad hier">
                 <div><br></div>
                 <p *ngIf="numberOfGuesses > 0 && !guessed && secondsLocal > 0">
-                    <button mat-raised-button (click)="onSave()">Bevestig</button>
+                    <button mat-raised-button (click)="onSave()">Enter of klik hier</button>
                 </p>
             </body>
         </div>
@@ -45,7 +45,6 @@
                             <p>Je hebt geen beurten meer over</p>
                             <p>het getal was {{randomNumber}}</p>
                             <button class= "button" mat-raised-button (click)= "nieuwSpel()">Nogmaals!</button>
-
                         </ng-template>
                 </ng-template>
                 <ng-template #secondsBad>

@@ -51,5 +51,10 @@ constructor(counterService: CounterService) {
     console.log(this.guessed);
   }
 
+  onKeyDown(event){
+    if (event.key === "Enter"){
+     this.onSave();
+    }
+  }
   
 }
